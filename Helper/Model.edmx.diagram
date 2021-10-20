@@ -17,6 +17,7 @@
         <AssociationConnector Association="RoomKuzTarModel.FK_Order_Basket" ManuallyRouted="false" />
         <AssociationConnector Association="RoomKuzTarModel.FK_Product_Category" ManuallyRouted="false" />
         <AssociationConnector Association="RoomKuzTarModel.FK_User_Role" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="RoomKuzTarModel.ProdBasket" Width="1.5" PointX="5.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

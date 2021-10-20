@@ -74,6 +74,26 @@
           <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "RoomKuzTar.dbo.ProdBasket" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="ProdBasket">
+          <Key>
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="Material" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="IdUser" />
+            <PropertyRef Name="IdProduct" />
+            <PropertyRef Name="IdCategory" />
+          </Key>
+          <Property Name="Price" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="PhotoProduct" Type="varbinary(max)" />
+          <Property Name="Material" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NameProduct" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="IdProduct" Type="int" Nullable="false" />
+          <Property Name="IdCategory" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Basket_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="Basket" Type="Self.Basket" Multiplicity="*" />
@@ -173,6 +193,18 @@
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProdBasket" EntityType="Self.ProdBasket" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ProdBasket].[Price] AS [Price], 
+    [ProdBasket].[PhotoProduct] AS [PhotoProduct], 
+    [ProdBasket].[Material] AS [Material], 
+    [ProdBasket].[NameProduct] AS [NameProduct], 
+    [ProdBasket].[Description] AS [Description], 
+    [ProdBasket].[IdUser] AS [IdUser], 
+    [ProdBasket].[IdProduct] AS [IdProduct], 
+    [ProdBasket].[IdCategory] AS [IdCategory]
+    FROM [dbo].[ProdBasket] AS [ProdBasket]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Basket_Product" Association="Self.FK_Basket_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="Basket" EntitySet="Basket" />
@@ -395,6 +427,7 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="ProdBasket" EntityType="RoomKuzTarModel.ProdBasket" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -407,6 +440,24 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="ProdBasket">
+          <Key>
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="Material" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="IdUser" />
+            <PropertyRef Name="IdProduct" />
+            <PropertyRef Name="IdCategory" />
+          </Key>
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="PhotoProduct" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Material" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NameProduct" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <Property Name="IdProduct" Type="Int32" Nullable="false" />
+          <Property Name="IdCategory" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -513,6 +564,20 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище RoomKuzTarModel.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище RoomKuzTarModel.sp_upgraddiagrams" />
+          <EntitySetMapping Name="ProdBasket">
+            <EntityTypeMapping TypeName="RoomKuzTarModel.ProdBasket">
+              <MappingFragment StoreEntitySet="ProdBasket">
+                <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
+                <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NameProduct" ColumnName="NameProduct" />
+                <ScalarProperty Name="Material" ColumnName="Material" />
+                <ScalarProperty Name="PhotoProduct" ColumnName="PhotoProduct" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

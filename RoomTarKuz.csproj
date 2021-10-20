@@ -65,8 +65,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helper\ClassUserId.cs" />
+    <Compile Include="Helper\ProdBasket.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Manager\ManagerMain.xaml.cs">
       <DependentUpon>ManagerMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shopper\EditProfilePage.xaml.cs">
+      <DependentUpon>EditProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shopper\ProfilePage.xaml.cs">
+      <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shopper\ShopperMain.xaml.cs">
       <DependentUpon>ShopperMain.xaml</DependentUpon>
@@ -174,6 +183,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Manager\ManagerMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shopper\EditProfilePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shopper\ProfilePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

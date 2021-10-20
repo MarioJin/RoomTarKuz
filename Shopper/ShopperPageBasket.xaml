@@ -15,8 +15,11 @@
             <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
 
-        <WrapPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <Button x:Name="btnBackFrm" Content="&lt;" Style="{StaticResource ButtonTwo}" Width="45" Click="btnBackFrm_Click"/>
+        <WrapPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="btnBackFrm" Content="&lt;" Style="{StaticResource ButtonTwo}" Click="btnBackFrm_Click" Width="45" />
+            <TextBox x:Name="txbSearch" TextChanged="txbSearch_TextChanged"/>
+            <ComboBox x:Name="cmbFiltrationCategory" SelectedIndex="0" SelectionChanged="cmbFiltrationCategory_SelectionChanged"/>
+            <ComboBox x:Name="cmbSortingPrice" SelectedIndex="0" SelectionChanged="cmbSortingPrice_SelectionChanged"/>
         </WrapPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
@@ -29,11 +32,31 @@
             <Button x:Name="btnCreateOrder" Content="Офрмить заказ"  Style="{StaticResource ButtonOne}" Click="btnCreateOrder_Click"/>
         </StackPanel>
 
-        <ListView  Grid.Row="1" x:Name="LvProduct" SelectionChanged="LvProduct_SelectionChanged">
+        <ListView  Grid.Row="1" x:Name="LvBasket" SelectionChanged="LvProduct_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        
+                    <Grid Height="100" Width="580">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="100"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="280"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Source="{Binding PhotoProduct}" HorizontalAlignment="Stretch"/>
+
+                        <StackPanel Grid.Column="1" Orientation="Vertical">
+                            <TextBlock x:Name="tbckNameProduct" Text="{Binding NameProduct}" FontSize="20"/>
+                            <Line X1="350" Y1="1" Stroke="#00ADB5"/>
+                            <TextBlock x:Name="tbckDescription" Text="{Binding Description}" FontSize="14"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock x:Name="tbckPrice" Text="{Binding Price}" FontSize="14"/>
+                        </StackPanel>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

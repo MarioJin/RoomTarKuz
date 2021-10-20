@@ -1,6 +1,7 @@
 ﻿using RoomTarKuz.Helper;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -115,15 +116,16 @@ namespace RoomTarKuz.Shopper
         private void btnAddBasket_Click(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show("Вы хотите добвить товар в корзину?", "Подтверждение", MessageBoxButton.YesNo);
-          
+            
             if (result == MessageBoxResult.Yes)
             {
                 
                 Basket basketAdd = new Basket();
                 {
                     basketAdd.IdProduct = listProduct[LvProduct.SelectedIndex].IdProduct;
-                    basketAdd.IdUser = ClassUserId.Instance.USER;
+                    basketAdd.IdUser = ClassUserId.Instance.idUserInt;
                     basketAdd.Price = listProduct[LvProduct.SelectedIndex].Price;
+                    
                 };
 
                 DB.Basket.Add(basketAdd);

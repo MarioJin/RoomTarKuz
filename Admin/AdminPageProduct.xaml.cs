@@ -73,6 +73,8 @@ namespace RoomTarKuz.Admin
             listProduct = DB.Product.ToList();
             LvProduct.ItemsSource = listProduct;
 
+           
+
             var category = DB.Category.ToList();
             foreach (var i in category)
             {

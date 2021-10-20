@@ -41,7 +41,7 @@ namespace RoomTarKuz
                 (i => i.Login == txbLogin.Text && i.Password == psdPassword.Password);
             if (psdPassword.Password == psdPasswordRepeat.Password)
             {
-                ClassUserId.Instance.USER = userModel.IdUser;
+                ClassUserId.Instance.idUserInt = userModel.IdUser;
                 if (userModel == null)
                 {
                     MessageBox.Show("Пользователь не найден, повторите попытку", "Пользователь не найден", MessageBoxButton.OK);

@@ -22,19 +22,78 @@ namespace RoomTarKuz.Shopper
     public partial class ShopperPageBasket : Page
     {
         public static RoomKuzTarEntities DB = new RoomKuzTarEntities();
-        List<Basket> listBasket = new List<Basket>();
-        private int numPage = 0; 
+        List<ProdBasket> listBasket = new List<ProdBasket>();
+        private int numPage = 0;
+
+
+        List<string> listSort = new List<string>()
+        {
+            "Наименование (по возрастанию)",
+            "Наименование (по убыванию)",
+            "Стоимость (по возрастанию)",
+            "Стоимость (по убыванию)"
+        };
+        List<string> listFiltr = new List<string>();
 
         public ShopperPageBasket()
         {
             InitializeComponent();
 
+            LvBasket.ItemsSource = DB.ProdBasket.Where(i => i.IdUser == ClassUserId.Instance.idUserInt).ToList();
+            var category = DB.Category.ToList();
+            foreach (var i in category)
+            {
+                listFiltr.Add(i.NameCategory);
+            }
+            listFiltr.Insert(0, "Все категории");
+            cmbFiltrationCategory.ItemsSource = listFiltr;
+            cmbFiltrationCategory.SelectedIndex = 0;
+
+            cmbSortingPrice.ItemsSource = listSort;
+            cmbSortingPrice.SelectedIndex = 0;
+
         }
+
+        void Filtr()
+        {
+            listBasket = DB.ProdBasket.ToList();
+
+            var selectSort = cmbSortingPrice.SelectedIndex;
+            switch (selectSort)
+            {
+                case 0:
+                    listBasket = listBasket.OrderBy(i => i.NameProduct).ToList();
+                    break;
+                case 1:
+                    listBasket = listBasket.OrderByDescending(i => i.NameProduct).ToList();
+                    break;
+                case 2:
+                    listBasket = listBasket.OrderBy(i => i.Price).ToList();
+                    break;
+                case 3:
+                    listBasket = listBasket.OrderByDescending(i => i.Price).ToList();
+                    break;
+                default:
+                    listBasket = listBasket.OrderBy(i => i.IdProduct).ToList();
+                    break;
+            }
+
+            var selectFiltr = cmbFiltrationCategory.SelectedIndex;
+            if (selectFiltr != 0)
+            {
+                listBasket = listBasket.Where(i => i.IdCategory == selectFiltr).ToList();
+            }
+            listBasket = listBasket.Skip(10 * numPage).Take(10).ToList();
+            LvBasket.ItemsSource = listBasket;
+        }
+
 
         private void LvProduct_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            listBasket.Where
-                (i => i.IdUser == listBasket[LvProduct.SelectedIndex].IdUser);
+          
+            Filtr();
+
+
         }
 
         private void btnBackFrm_Click(object sender, RoutedEventArgs e)
@@ -49,6 +108,7 @@ namespace RoomTarKuz.Shopper
                 numPage--;
                 tbckPage.Text = (numPage + 1).ToString();
             }
+            Filtr();
         }
 
         private void btnNextPage_Click(object sender, RoutedEventArgs e)
@@ -58,11 +118,27 @@ namespace RoomTarKuz.Shopper
                 numPage++;
                 tbckPage.Text = (numPage + 1).ToString();
             }
+            Filtr();
         }
 
         private void btnCreateOrder_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("Заказ оформлен", "Успех", MessageBoxButton.OK);
+        }
 
+        private void txbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            listBasket = listBasket.Where(i => i.NameProduct.ToLower().Contains(txbSearch.Text.ToLower())).ToList();
+        }
+
+        private void cmbFiltrationCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Filtr();
+        }
+
+        private void cmbSortingPrice_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Filtr();
         }
     }
 }
