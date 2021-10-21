@@ -13,5 +13,7 @@ namespace RoomTarKuz.Helper
         public static ClassUserId Instance { get { return instance.Value; } }
         public int idUserInt { get; set; }
 
+        public int NumOrder { get; set; }
+
     }
 }

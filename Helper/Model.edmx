@@ -25,7 +25,8 @@
           <Key>
             <PropertyRef Name="IdOrder" />
           </Key>
-          <Property Name="IdOrder" Type="int" Nullable="false" />
+          <Property Name="IdOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumOrder" Type="int" Nullable="false" />
           <Property Name="IdBasket" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
         </EntityType>
@@ -84,6 +85,7 @@
             <PropertyRef Name="IdUser" />
             <PropertyRef Name="IdProduct" />
             <PropertyRef Name="IdCategory" />
+            <PropertyRef Name="IdBasket" />
           </Key>
           <Property Name="Price" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="PhotoProduct" Type="varbinary(max)" />
@@ -93,6 +95,7 @@
           <Property Name="IdUser" Type="int" Nullable="false" />
           <Property Name="IdProduct" Type="int" Nullable="false" />
           <Property Name="IdCategory" Type="int" Nullable="false" />
+          <Property Name="IdBasket" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Basket_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
@@ -202,7 +205,8 @@
     [ProdBasket].[Description] AS [Description], 
     [ProdBasket].[IdUser] AS [IdUser], 
     [ProdBasket].[IdProduct] AS [IdProduct], 
-    [ProdBasket].[IdCategory] AS [IdCategory]
+    [ProdBasket].[IdCategory] AS [IdCategory], 
+    [ProdBasket].[IdBasket] AS [IdBasket]
     FROM [dbo].[ProdBasket] AS [ProdBasket]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Basket_Product" Association="Self.FK_Basket_Product">
@@ -240,7 +244,7 @@
           <Property Name="Price" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Basket_Product" FromRole="Basket" ToRole="Product" />
           <NavigationProperty Name="User" Relationship="Self.FK_Basket_User" FromRole="Basket" ToRole="User" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Basket" FromRole="Basket" ToRole="Order" />
+          <NavigationProperty Name="Order" Relationship="RoomKuzTarModel.FK_Order_Basket" FromRole="Basket" ToRole="Order" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -255,9 +259,10 @@
             <PropertyRef Name="IdOrder" />
           </Key>
           <Property Name="IdOrder" Type="Int32" Nullable="false" />
-          <Property Name="IdBasket" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Basket" Relationship="Self.FK_Order_Basket" FromRole="Order" ToRole="Basket" />
+          <Property Name="IdBasket" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Basket" Relationship="RoomKuzTarModel.FK_Order_Basket" FromRole="Order" ToRole="Basket" />
+          <Property Name="NumOrder" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -333,18 +338,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Order_Basket">
-          <End Role="Basket" Type="Self.Basket" Multiplicity="1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Basket">
-              <PropertyRef Name="IdBasket" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="IdBasket" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Product_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -385,10 +378,6 @@
             <End Role="User" EntitySet="User" />
             <End Role="Basket" EntitySet="Basket" />
           </AssociationSet>
-          <AssociationSet Name="FK_Order_Basket" Association="Self.FK_Order_Basket">
-            <End Role="Basket" EntitySet="Basket" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
           <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Product" EntitySet="Product" />
@@ -428,6 +417,10 @@
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <EntitySet Name="ProdBasket" EntityType="RoomKuzTarModel.ProdBasket" />
+          <AssociationSet Name="FK_Order_Basket" Association="RoomKuzTarModel.FK_Order_Basket">
+            <End Role="Basket" EntitySet="Basket" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -448,6 +441,7 @@
             <PropertyRef Name="IdUser" />
             <PropertyRef Name="IdProduct" />
             <PropertyRef Name="IdCategory" />
+            <PropertyRef Name="IdBasket" />
           </Key>
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
           <Property Name="PhotoProduct" Type="Binary" MaxLength="Max" FixedLength="false" />
@@ -457,7 +451,20 @@
           <Property Name="IdUser" Type="Int32" Nullable="false" />
           <Property Name="IdProduct" Type="Int32" Nullable="false" />
           <Property Name="IdCategory" Type="Int32" Nullable="false" />
+          <Property Name="IdBasket" Type="Int32" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Order_Basket">
+          <End Type="RoomKuzTarModel.Basket" Role="Basket" Multiplicity="1" />
+          <End Type="RoomKuzTarModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Basket">
+              <PropertyRef Name="IdBasket" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdBasket" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -485,8 +492,9 @@
           <EntitySetMapping Name="Order">
             <EntityTypeMapping TypeName="RoomKuzTarModel.Order">
               <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+                <ScalarProperty Name="NumOrder" ColumnName="NumOrder" />
                 <ScalarProperty Name="IdBasket" ColumnName="IdBasket" />
+                <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -567,6 +575,7 @@
           <EntitySetMapping Name="ProdBasket">
             <EntityTypeMapping TypeName="RoomKuzTarModel.ProdBasket">
               <MappingFragment StoreEntitySet="ProdBasket">
+                <ScalarProperty Name="IdBasket" ColumnName="IdBasket" />
                 <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
                 <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />

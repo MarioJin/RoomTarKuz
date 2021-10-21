@@ -15,8 +15,9 @@ namespace RoomTarKuz.Helper
     public partial class Order
     {
         public int IdOrder { get; set; }
-        public int IdBasket { get; set; }
         public System.DateTime Date { get; set; }
+        public int IdBasket { get; set; }
+        public int NumOrder { get; set; }
     
         public virtual Basket Basket { get; set; }
     }

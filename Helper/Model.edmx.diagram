@@ -14,10 +14,10 @@
         <EntityTypeShape EntityType="RoomKuzTarModel.User" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
         <AssociationConnector Association="RoomKuzTarModel.FK_Basket_Product" ManuallyRouted="false" />
         <AssociationConnector Association="RoomKuzTarModel.FK_Basket_User" ManuallyRouted="false" />
-        <AssociationConnector Association="RoomKuzTarModel.FK_Order_Basket" ManuallyRouted="false" />
         <AssociationConnector Association="RoomKuzTarModel.FK_Product_Category" ManuallyRouted="false" />
         <AssociationConnector Association="RoomKuzTarModel.FK_User_Role" ManuallyRouted="false" />
         <EntityTypeShape EntityType="RoomKuzTarModel.ProdBasket" Width="1.5" PointX="5.375" PointY="7.75" />
+        <AssociationConnector Association="RoomKuzTarModel.FK_Order_Basket" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

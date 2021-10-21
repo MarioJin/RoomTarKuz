@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace RoomTarKuz.Shopper
 {
     /// <summary>
@@ -121,9 +122,33 @@ namespace RoomTarKuz.Shopper
             Filtr();
         }
 
+
+     
+
         private void btnCreateOrder_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Заказ оформлен", "Успех", MessageBoxButton.OK);
+            var result = MessageBox.Show("Вы хотите оформить заказ?", "Подтверждение", MessageBoxButton.YesNo);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                for (int i = 0; i < listBasket.Count(); i++)
+                {
+                    Order orderAdd = new Order();
+                    orderAdd.IdBasket = listBasket[i].IdBasket;
+                    orderAdd.Date = DateTime.Now;
+                    orderAdd.NumOrder = ClassUserId.Instance.NumOrder;
+                    DB.Order.Add(orderAdd);
+                    DB.SaveChanges();
+                    
+                }
+                ClassUserId.Instance.NumOrder++;
+
+                MessageBox.Show("Заказ оформлен", "Заказ", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Заказ не оформлен", "Отмена", MessageBoxButton.OK);
+            }
         }
 
         private void txbSearch_TextChanged(object sender, TextChangedEventArgs e)

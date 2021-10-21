@@ -22,5 +22,6 @@ namespace RoomTarKuz.Helper
         public int IdUser { get; set; }
         public int IdProduct { get; set; }
         public int IdCategory { get; set; }
+        public int IdBasket { get; set; }
     }
 }

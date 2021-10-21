@@ -25,11 +25,23 @@ namespace RoomTarKuz
     public partial class Auth : Page
     {
         public static RoomKuzTarEntities DB = new RoomKuzTarEntities();
+        Order order = new Order();
         public Auth()
         {
-            InitializeComponent();
-        }
+            ClassUserId.Instance.NumOrder = MaxOrderNum();
 
+           
+            InitializeComponent();
+            
+        }
+        public int MaxOrderNum()
+        {
+            List<Order> listOrder = new List<Order>();
+            listOrder = DB.Order.ToList();
+            var s = listOrder.ToArray();
+            int maxValue = s.AsEnumerable().Select(row => Convert.ToInt32(row.NumOrder)).Max();
+            return maxValue;
+        }
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
