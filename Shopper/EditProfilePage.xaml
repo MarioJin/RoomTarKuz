@@ -5,10 +5,43 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RoomTarKuz.Shopper"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="EditProfilePage">
+      Title="EditProfilePage" MaxHeight="450" MinHeight="500" MinWidth="400" MaxWidth="400" Width="400" Height="500">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="350"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Введите Имя:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox x:Name="txbFirstName" TextChanged="txbFirstName_TextChanged" />
+
+            <TextBlock Text="Введите Фамилию" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox x:Name="txbLastName" TextChanged="txbLastName_TextChanged"/>
+            
+            <TextBlock Text="Введите Отчество" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox x:Name="txbPatronymic" TextChanged="txbPatronymic_TextChanged"/>
+
+            <TextBlock Text="Выберите изображение:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button x:Name="btnView" Content="Обзор..." Style="{StaticResource ButtonOne}" Click="btnView_Click"/>
+
+            <TextBlock Text="Введите Телефон:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox x:Name="txbPhone" TextChanged="txbPhone_TextChanged" />
+
+            <TextBlock Text="Введите Email:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox x:Name="txbEmail" TextChanged="txbEmail_TextChanged"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="btnBack" Content="Назад" Style="{StaticResource ButtonOne}" Click="btnBack_Click"/>
+            <Button x:Name="btnSave" Content="Сохранить" Style="{StaticResource ButtonOne}" Click="btnSave_Click"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Vertical" VerticalAlignment="Bottom">
+            <TextBlock Text="Room Interior" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Image Source="..\Resources\logo.png" Width="50"/>
+        </StackPanel>
     </Grid>
 </Page>

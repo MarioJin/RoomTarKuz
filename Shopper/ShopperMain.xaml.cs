@@ -26,17 +26,17 @@ namespace RoomTarKuz.Shopper
 
         private void btnListProduct_Click(object sender, RoutedEventArgs e)
         {
-            frmMainAdmin.Navigate(new ShopperPageProduct());
+            frmMainShopper.Navigate(new ShopperPageProduct());
         }
 
         private void btnListBasket_Click(object sender, RoutedEventArgs e)
         {
-            frmMainAdmin.Navigate(new ShopperPageBasket());
+            frmMainShopper.Navigate(new ShopperPageBasket());
         }
 
         private void btnListProfile_Click(object sender, RoutedEventArgs e)
         {
-
+            frmMainShopper.Navigate(new ProfilePage());
         }
 
         private void btnListCloseApp_Click(object sender, RoutedEventArgs e)

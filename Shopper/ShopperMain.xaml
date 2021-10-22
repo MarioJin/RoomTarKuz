@@ -26,7 +26,7 @@
         </StackPanel>
 
         <Grid Grid.Column="1">
-            <Frame x:Name="frmMainAdmin" Margin="0, 0, 30, 0"/>
+            <Frame x:Name="frmMainShopper" Margin="0, 0, 30, 0"/>
         </Grid>
     </Grid>
 </Window>

@@ -7,8 +7,57 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ProfilePage">
-
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="330"/>
+            
+        </Grid.RowDefinitions>
+
+        <WrapPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Button x:Name="btnBackFrm" Content="&lt;" Style="{StaticResource ButtonTwo}" Click="btnBackFrm_Click" Width="45"/>
+        </WrapPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Button x:Name="btnEditUser" Content="Редактировать профиль" Style="{StaticResource ButtonOne}" Click="btnEditUser_Click" />
+        </StackPanel>
+
+        <ListView Grid.Row="2" x:Name="LvProfile" SelectionChanged="LvProfile_SelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="100" Width="580">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="100"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="280"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+
+                        <WrapPanel Grid.Column="0" Orientation="Vertical">
+                            <TextBlock x:Name="tbckFirstName" Text="{Binding FirstName}" FontSize="20"/>
+                            <TextBlock x:Name="tbckLastName" Text="{Binding LastName}" FontSize="20"/>
+                            <TextBlock x:Name="tbckPatronymic" Text="{Binding Patronymic}" FontSize="20"/>
+                            <Line X1="350" Y1="1" Stroke="#00ADB5"/>
+                        </WrapPanel>
+
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock x:Name="tbckPhone" Text="{Binding Phone}" FontSize="14" />
+
+                            <TextBlock x:Name="tbckEmail" Text="{Binding Email}" FontSize="14" Margin="5 0"/>
+                        </StackPanel>
+
+                        <Image Grid.Column="2" Source="{Binding PhotoUser}" HorizontalAlignment="Stretch"/>
+
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <Frame x:Name="frmMainE" Margin="0, 0, 30, 0"/>
+        </ListView>
+       
+
     </Grid>
 </Page>
