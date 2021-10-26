@@ -71,8 +71,8 @@
     <Compile Include="Manager\ManagerMain.xaml.cs">
       <DependentUpon>ManagerMain.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Shopper\EditProfilePage.xaml.cs">
-      <DependentUpon>EditProfilePage.xaml</DependentUpon>
+    <Compile Include="Shopper\EditProfile.xaml.cs">
+      <DependentUpon>EditProfile.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shopper\ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
@@ -186,7 +186,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Shopper\EditProfilePage.xaml">
+    <Page Include="Shopper\EditProfile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

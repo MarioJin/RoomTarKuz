@@ -26,39 +26,35 @@ namespace RoomTarKuz.Shopper
         public ProfilePage()
         {
             InitializeComponent();
-            LvProfile.ItemsSource = DB.User.Where(i => i.IdUser == ClassUserId.Instance.idUserInt).ToList();
             listUser = DB.User.Where(i => i.IdUser == ClassUserId.Instance.idUserInt).ToList();
             LvProfile.ItemsSource = listUser;
-            
+
         }
 
         private void btnEditUser_Click(object sender, RoutedEventArgs e)
         {
-            string strFirstName = listUser[LvProfile.SelectedIndex].FirstName;
-            string strLastName = listUser[LvProfile.SelectedIndex].LastName;
-            string strPatronymic = listUser[LvProfile.SelectedIndex].Patronymic;
-            string Phone = listUser[LvProfile.SelectedIndex].Phone;
-            string Email = listUser[LvProfile.SelectedIndex].Email;
+            var user = DB.User.Find(ClassUserId.Instance.idUserInt);
 
-            byte[] bPhoto = listUser[LvProfile.SelectedIndex].PhotoUser;
+            string strFirstName = user.FirstName;
+            string strLastName = user.LastName;
+            string strPatronymic = user.Patronymic;
+            string Phone = user.Phone;
+            string Email = user.Email;
 
-            EditProfilePage editProfile = new EditProfilePage(strFirstName, strLastName,
+            byte[] bPhoto = user.PhotoUser;
+
+            //string strFirstName = listUser[LvProfile.SelectedIndex].FirstName;
+            //string strLastName = listUser[LvProfile.SelectedIndex].LastName;
+            //string strPatronymic = listUser[LvProfile.SelectedIndex].Patronymic;
+            //string Phone = listUser[LvProfile.SelectedIndex].Phone;
+            //string Email = listUser[LvProfile.SelectedIndex].Email;
+
+            //byte[] bPhoto = listUser[LvProfile.SelectedIndex].PhotoUser;
+
+            EditProfile editProfile = new EditProfile(strFirstName, strLastName,
                 strPatronymic, Phone, Email, bPhoto);
-
-            frmMainShopper.Navigate(editProfile);
-            //int ID = listProduct[LvProduct.SelectedIndex].IdProduct;
-            //string strName = listProduct[LvProduct.SelectedIndex].NameProduct.ToString();
-            //string strPrice = listProduct[LvProduct.SelectedIndex].Price.ToString();
-            //string strMaterial = listProduct[LvProduct.SelectedIndex].Material.ToString();
-            //string strDiscription = listProduct[LvProduct.SelectedIndex].Description.ToString();
-            //int IDCat = listProduct[LvProduct.SelectedIndex].IdCategory;
-            //byte[] bPhoto = listProduct[LvProduct.SelectedIndex].PhotoProduct;
-
-            //AdminEditProduct editProduct = new AdminEditProduct(ID, strName,
-            //    Convert.ToDecimal(strPrice), strMaterial,
-            //    strDiscription, IDCat, bPhoto);
-
-            //editProduct.Show();
+            editProfile.Show();
+            
         }
 
         private void btnBackFrm_Click(object sender, RoutedEventArgs e)

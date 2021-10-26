@@ -1,12 +1,11 @@
-﻿<Page x:Class="RoomTarKuz.Shopper.EditProfilePage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:RoomTarKuz.Shopper"
-      mc:Ignorable="d" 
-      Title="EditProfilePage" MaxHeight="450" MinHeight="500" MinWidth="400" MaxWidth="400" Width="400" Height="500">
-
+﻿<Window x:Class="RoomTarKuz.Shopper.EditProfile"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RoomTarKuz.Shopper"
+        mc:Ignorable="d"
+        Title="EditProfile" MaxHeight="450" MinHeight="500" MinWidth="400" MaxWidth="400" Width="400" Height="500">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="350"/>
@@ -20,7 +19,7 @@
 
             <TextBlock Text="Введите Фамилию" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBox x:Name="txbLastName" TextChanged="txbLastName_TextChanged"/>
-            
+
             <TextBlock Text="Введите Отчество" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBox x:Name="txbPatronymic" TextChanged="txbPatronymic_TextChanged"/>
 
@@ -28,15 +27,15 @@
             <Button x:Name="btnView" Content="Обзор..." Style="{StaticResource ButtonOne}" Click="btnView_Click"/>
 
             <TextBlock Text="Введите Телефон:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox x:Name="txbPhone" TextChanged="txbPhone_TextChanged" />
+            <TextBox x:Name="txbPhone" TextChanged="txbPhone_TextChanged"  />
 
             <TextBlock Text="Введите Email:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox x:Name="txbEmail" TextChanged="txbEmail_TextChanged"/>
+            <TextBox x:Name="txbEmail" TextChanged="txbEmail_TextChanged" />
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="btnBack" Content="Назад" Style="{StaticResource ButtonOne}" Click="btnBack_Click"/>
-            <Button x:Name="btnSave" Content="Сохранить" Style="{StaticResource ButtonOne}" Click="btnSave_Click"/>
+            <Button x:Name="btnBack" Content="Назад" Style="{StaticResource ButtonOne}" Click="btnBack_Click" />
+            <Button x:Name="btnSave" Content="Сохранить" Style="{StaticResource ButtonOne}" Click="btnSave_Click" />
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Vertical" VerticalAlignment="Bottom">
@@ -44,4 +43,4 @@
             <Image Source="..\Resources\logo.png" Width="50"/>
         </StackPanel>
     </Grid>
-</Page>
+</Window>
