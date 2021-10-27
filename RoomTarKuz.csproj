@@ -71,6 +71,9 @@
     <Compile Include="Manager\ManagerMain.xaml.cs">
       <DependentUpon>ManagerMain.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Shopper\CompanyPage.xaml.cs">
+      <DependentUpon>CompanyPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Shopper\EditProfile.xaml.cs">
       <DependentUpon>EditProfile.xaml</DependentUpon>
     </Compile>
@@ -183,6 +186,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Manager\ManagerMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shopper\CompanyPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

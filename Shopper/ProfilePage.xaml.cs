@@ -28,6 +28,7 @@ namespace RoomTarKuz.Shopper
             InitializeComponent();
             listUser = DB.User.Where(i => i.IdUser == ClassUserId.Instance.idUserInt).ToList();
             LvProfile.ItemsSource = listUser;
+            
 
         }
 
@@ -53,7 +54,11 @@ namespace RoomTarKuz.Shopper
 
             EditProfile editProfile = new EditProfile(strFirstName, strLastName,
                 strPatronymic, Phone, Email, bPhoto);
-            editProfile.Show();
+
+            
+            editProfile.ShowDialog(); //Show()
+            
+            
             
         }
 

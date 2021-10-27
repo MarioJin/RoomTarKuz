@@ -14,6 +14,7 @@ namespace RoomTarKuz.Helper
         public int idUserInt { get; set; }
 
         public int NumOrder { get; set; }
+        public List<User> s = new List<User>();
 
     }
 }

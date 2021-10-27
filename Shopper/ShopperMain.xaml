@@ -18,6 +18,7 @@
             <Button x:Name="btnListProfile" Content="Профиль" Style="{StaticResource ButtonOne}" Click="btnListProfile_Click"/>
             <Button x:Name="btnListExitProfile" Content="Выйти из профиля" Style="{StaticResource ButtonOne}" Click="btnListExitProfile_Click"/>
             <Button x:Name="btnListCloseApp" Content="Закрыть приложение" Style="{StaticResource ButtonOne}" Click="btnListCloseApp_Click"/>
+             <Button x:Name="btnListCompany" Content="О нашей компании" Style="{StaticResource ButtonOne}" Click="btnListCompany_Click"/>
         </StackPanel>
 
         <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Bottom">

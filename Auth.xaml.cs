@@ -50,7 +50,7 @@ namespace RoomTarKuz
         private void btnEnter_Click(object sender, RoutedEventArgs e)
         {
             var userModel = DB.User.FirstOrDefault
-                (i => i.Login == txbLogin.Text && i.Password == psdPassword.Password);
+                (i => i.Login == txbLogin.Text && i.Password == psdPassword.Password && i.IsDeleted != true );
             if (psdPassword.Password == psdPasswordRepeat.Password)
             {
                 ClassUserId.Instance.idUserInt = userModel.IdUser;

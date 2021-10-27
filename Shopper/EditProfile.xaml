@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RoomTarKuz.Shopper"
         mc:Ignorable="d"
-        Title="EditProfile" MaxHeight="450" MinHeight="500" MinWidth="400" MaxWidth="400" Width="400" Height="500">
+        Title="EditProfile" MaxHeight="450" MinHeight="500" MinWidth="400" MaxWidth="400" Width="400" Height="500" >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="350"/>

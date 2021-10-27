@@ -33,7 +33,6 @@ namespace RoomTarKuz.Shopper
         {
             InitializeComponent();
 
-           
 
             txbFirstName.Text = strFirstNameED;
             txbLastName.Text = strLastNameED;
@@ -92,14 +91,19 @@ namespace RoomTarKuz.Shopper
             Close();
         }
 
+
+        
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             var v = DB.User.Find(ClassUserId.Instance.idUserInt);
             var log = v.Login;
             var pass = v.Password;
             var role = v.IdRole;
-          
-           // DB.User.Remove(v);
+            
+            v.IsDeleted = true;
+
+            ProfilePage profilePage = new ProfilePage();
+            // DB.User.Remove(v);
             var result = MessageBox.Show("Вы хотите редактировать профиль?", "Подтверждение", MessageBoxButton.YesNo);
 
             if (result == MessageBoxResult.Yes)
@@ -114,19 +118,38 @@ namespace RoomTarKuz.Shopper
                     Password = pass,
                     Login = log,
                     IdRole = role,
-                    
+
                     PhotoUser = FileName != null ?
                    getJPGFromImageControl(imgImageUser.Source as BitmapImage) : OldPhoto
                 };
 
                 DB.User.Add(userEdit);
-               
+
                 DB.SaveChanges();
 
                 ClassUserId.Instance.idUserInt = userEdit.IdUser;
-                userEdit = null;
+
                 MessageBox.Show("Профиль успешно изменен", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                
+
             }
+            
+                
         }
+        
+        //public void Window_Closed(object sender, EventArgs e)
+        //{
+            
+
+            
+        //List<User> listUser = new List<User>();
+
+
+        //listUser = DB.User.Where(i => i.IdUser == ClassUserId.Instance.idUserInt).ToList();
+        //    ClassUserId.Instance.s = listUser;
+           
+            
+        //}
     }
 }

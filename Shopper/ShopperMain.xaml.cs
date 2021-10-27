@@ -50,5 +50,10 @@ namespace RoomTarKuz.Shopper
             mW.Show();
             this.Close();
         }
+
+        private void btnListCompany_Click(object sender, RoutedEventArgs e)
+        {
+            frmMainShopper.Navigate(new CompanyPage());
+        }
     }
 }
