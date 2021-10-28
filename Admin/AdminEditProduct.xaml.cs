@@ -26,10 +26,10 @@ namespace RoomTarKuz.Admin
         public string FileName;
 
         public static RoomKuzTarEntities DB = new RoomKuzTarEntities();
-        Image imgImageProduct = new Image();
-        List<Product> listProduct = new List<Product>();
-        string PathProduct;
-        int ID = 0;
+        private Image imgImageProduct = new Image();
+        private List<Product> listProduct = new List<Product>();
+        private string PathProduct;
+        private int ID = 0;
         private byte[] OldPhoto = null;
 
         public AdminEditProduct(int IdED, string NameED, decimal PriceED, string MaterialED,
@@ -52,7 +52,7 @@ namespace RoomTarKuz.Admin
             cmbFiltrationCategory.ItemsSource = cate;
             cmbFiltrationCategory.SelectedIndex = CatED;
         }
-    
+
         private void btnCloseWindow_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -64,7 +64,10 @@ namespace RoomTarKuz.Admin
 
             if (result == MessageBoxResult.Yes)
             {
-                Product prodEdit = new Product();
+                //listProduct = listProduct.Where(i => i.IdCategory == selectFiltr).ToList();
+                //var userModel = DB.User.FirstOrDefault
+                //(i => i.Login == txbLogin.Text && i.Password == psdPassword.Password && i.IsDeleted != true);
+                Product prodEdit = DB.Product.Where(i => i.IdProduct == ID).SingleOrDefault();
                 prodEdit.NameProduct = txbName.Text;
                 prodEdit.IdCategory = cmbFiltrationCategory.SelectedIndex;
                 prodEdit.Price = Convert.ToDecimal(txbPrice.Text);
@@ -73,7 +76,7 @@ namespace RoomTarKuz.Admin
                 prodEdit.PhotoProduct = FileName != null ?
                 getJPGFromImageControl(imgImageProduct.Source as BitmapImage) : OldPhoto;
 
-                DB.Product.Add(prodEdit);
+                // DB.Product.Add(prodEdit);
                 DB.SaveChanges();
                 MessageBox.Show("Товар успешно изменен", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -97,30 +100,25 @@ namespace RoomTarKuz.Admin
                 imgImageProduct.Source = new BitmapImage(new Uri(openFD.FileName));
             }
         }
-    
+
         private void txbName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
         }
 
         private void txbPrice_TextChanged(object sender, TextChangedEventArgs e)
         {
-
         }
 
         private void txbDescription_TextChanged(object sender, TextChangedEventArgs e)
         {
-
         }
 
         private void txbMaterial_TextChanged(object sender, TextChangedEventArgs e)
         {
-
         }
 
         private void cmbFiltrationCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
         }
     }
 }
